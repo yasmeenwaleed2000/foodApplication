@@ -18,7 +18,7 @@ export default function Forgotpass() {
       .post("https://upskilling-egypt.com:443/api/v1/Users/Reset/Request", data)
       .then((response) => {
         //setTimeout(toast("successfull"), 2000);
-        //console.log(response.data.token);
+        console.log(response.data.token);
         navigate("/reset-pass");
       })
       .catch((error) => {
@@ -39,7 +39,7 @@ export default function Forgotpass() {
                 <h5>Forgot Your Password?</h5>
                 <p className="text-muted">
                   No worries! Please enter your email and we will send a
-                  password reset link{" "}
+                  password reset link
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-5">

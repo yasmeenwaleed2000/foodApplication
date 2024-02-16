@@ -17,7 +17,8 @@ export default function Resetpass() {
     axios
       .post("https://upskilling-egypt.com:443/api/v1/Users/Reset", data)
       .then((response) => {
-       // setTimeout(toast("successfull"), 2000);
+        setTimeout(()=>toast.success("login success",{position:"top-right"}),100
+        ) ;
         console.log(response);
         navigate("/login");
       })

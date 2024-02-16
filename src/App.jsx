@@ -40,7 +40,7 @@ element:(
   </ProtectedRoute>),
 errorElement:<Notfound/>,
 children:[
-  {index:true, element:<Home/>},
+  {index:true, element:<Home  adminData= {adminData} />},
   {path:'recipes',element:<RecipesList/>},
   {path:'userlist',element:<UserList/>},
   {path:'categorieslist',element:<CategoriesList/>},

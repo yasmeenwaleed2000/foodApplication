@@ -13,11 +13,11 @@ export default function Login({saveAdminData}) {
   const onSubmit=(data)=>{
    axios.post("https://upskilling-egypt.com:443/api/v1/Users/Login",data).
    then((response)=>{
-    
+    setTimeout(()=>toast.success("login success",{position:"top-right"}),100
+    ) ;
     localStorage.setItem('adminToken',response.data.token)
     saveAdminData();
     navigate('/dashboard');
-   // toast("success loginnnnnnnnnnnnnnnnnnnnnn");
    })
    .catch((error)=>{
     toast(error.response.data.message)
