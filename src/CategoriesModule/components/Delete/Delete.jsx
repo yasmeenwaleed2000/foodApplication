@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import { useState } from "react";
-import noData from "../../../assets/images/noData.png";
+import DeleteModel from "../../../SharedModule/components/DeleteModel/DeleteModel";
 
 export default function Delete({catId,getAllItem}) {
   const [show, setShow] = useState(false);
@@ -39,12 +39,8 @@ export default function Delete({catId,getAllItem}) {
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
-          <div className='text-center'>
-        <img src={noData} alt="noData" />
-        <h5>Delete this item?</h5>
-         <p className='text-muted'>are you sure you want to delete this item ? if you are sure just click on delete it</p>
-         </div>
-
+         
+        <DeleteModel/>
 
         <div className="d-flex justify-content-end">
               <button className="btn btn-outline-danger" onClick={onSubmitDelete}>Delete this item</button>

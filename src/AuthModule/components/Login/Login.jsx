@@ -84,7 +84,10 @@ export default function Login({saveAdminData}) {
                     </p>
                   )}
 
-                  <div className="d-flex justify-content-end my-2">
+                  <div className="d-flex justify-content-between my-2 mb-3">
+                  <Link to={"/register"} className="text-success">
+                  Register Now?
+                    </Link>
                     <Link to={"forgot-pass"} className="text-success">
                       Forget password?
                     </Link>

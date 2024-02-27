@@ -1,7 +1,5 @@
-import { useState,useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState,useEffect } from 'react';
+import './App.css';
 import {RouterProvider,createBrowserRouter} from "react-router-dom";
 import Home from '../src/HomeModule/components/Home/Home';
 import Notfound from '../src/SharedModule/components/Notfound/Notfound';
@@ -15,6 +13,9 @@ import CategoriesList from './CategoriesModule/components/CategoriesList/Categor
 import {jwtDecode} from 'jwt-decode';
 import ProtectedRoute from './SharedModule/components/ProtectedRoute/ProtectedRoute';
 import Resetpass from './AuthModule/components/Resetpass/Resetpass';
+import RecipesData from './RecipesModule/components/RecipesData/RecipesData';
+import Register from './AuthModule/components/Register/Register';
+import UpdateData from './RecipesModule/components/UpdateData/UpdateData';
 
 
 
@@ -43,6 +44,8 @@ children:[
   {index:true, element:<Home  adminData= {adminData} />},
   {path:'recipes',element:<RecipesList/>},
   {path:'userlist',element:<UserList/>},
+  {path:'recipes-data',element:<RecipesData/>},
+  {path:'update-data',element:<UpdateData/>},
   {path:'categorieslist',element:<CategoriesList/>},
 ],
 },
@@ -60,6 +63,7 @@ children:[
 {path:'login',element:<Login  saveAdminData= {saveAdminData}/>},
 {path:'forgot-pass',element:<Forgotpass/>},
 {path:'reset-pass',element:<Resetpass/>},
+{path:'register',element:<Register/>},
 ],
 },
 

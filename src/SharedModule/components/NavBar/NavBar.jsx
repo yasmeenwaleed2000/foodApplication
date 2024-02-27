@@ -5,9 +5,9 @@ export default function Navbar({adminData}) {
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light m-5 rounded-4">
-      <div className=''><i class="fa-solid fa-magnifying-glass mx-3  w-100"></i></div>
-      <form class="d-flex">
-        <input class="form-control" type="search" placeholder="Search here" aria-label="Search"/>
+      <div className=''><i className="fa-solid fa-magnifying-glass mx-3  w-100"></i></div>
+      <form className="d-flex">
+        <input className="form-control" type="search" placeholder="Search here" aria-label="Search"/>
       </form>
         
   <div className="container-fluid">
@@ -25,8 +25,8 @@ export default function Navbar({adminData}) {
        
       </ul>
       <div >
-      <i class="fa-solid fa-chevron-down"></i>
-        <i class="fa-solid fa-bell mx-4"></i>
+      <i className="fa-solid fa-chevron-down"></i>
+        <i className="fa-solid fa-bell mx-4"></i>
      
       </div>
      

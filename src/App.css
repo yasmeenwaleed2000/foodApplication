@@ -21,8 +21,16 @@
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover {
   background-color: rgba(0, 176, 77, 0.2);
 }
-.header-cont{
-background-image: url(./assets//images/headerbg.png);
-background-repeat: no-repeat;
-background-size: cover;
+.header-cont {
+  background-image: url(./assets//images/headerbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-container {
+  background-color: #f0ffef;
+}
+
+.imagemodify {
+  width: 60px;
 }

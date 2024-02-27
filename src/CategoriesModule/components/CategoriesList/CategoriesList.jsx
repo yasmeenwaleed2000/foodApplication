@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Update from "../Update/Update";
 import Delete from "../Delete/Delete";
+import NoData from "../../../SharedModule/components/NoData/NoData";
 
 
 export default function Categories() {
@@ -105,14 +106,9 @@ export default function Categories() {
               </tbody>
             </table>
           ) : (
-            <div>
-              <img src={noData} alt="noData" />
-              <h5>No Data !</h5>
-              <p className="text-muted">
-                are you sure you want to delete this item ? if you are sure just
-                click on delete it
-              </p>
-            </div>
+
+            <NoData/>
+          
           )}
         </div>
       </div>
