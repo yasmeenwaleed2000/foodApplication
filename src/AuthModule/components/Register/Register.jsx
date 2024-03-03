@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Register() {
+  const navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -32,7 +35,8 @@ export default function Register() {
         "https://upskilling-egypt.com:443/api/v1/Users/Register",
         registerFormData
       );
-      toast.success("register success");
+      toast.success("register successfully");
+      navigate('/confirm-register');
     } catch (errors) {
       toast.error(errors.response.data.message);
     }
@@ -60,7 +64,7 @@ export default function Register() {
                     <div className="col-md-6">
                       <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">
-                          <i className="fa fa-envelope" aria-hidden="true"></i>
+                        <i className="fa-solid fa-user"></i>
                         </span>
 
                         <input
@@ -111,7 +115,7 @@ export default function Register() {
                     <div className="col-md-6">
                       <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">
-                          <i className="fa fa-envelope" aria-hidden="true"></i>
+                        <i className="fa-solid fa-globe"></i>
                         </span>
 
                         <input
@@ -136,7 +140,7 @@ export default function Register() {
                     <div className="col-md-6">
                       <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">
-                          <i className="fa fa-envelope" aria-hidden="true"></i>
+                        <i className="fa-solid fa-phone-volume"></i>
                         </span>
 
                         <input
@@ -184,7 +188,7 @@ export default function Register() {
                     <div className="col-md-6">
                       <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">
-                          <i className="fa fa-key" aria-hidden="true"></i>
+                        <i className="fa-solid fa-check-double"></i>
                         </span>
 
                         <input
@@ -208,7 +212,7 @@ export default function Register() {
                     <div className="col-md-12">
                       <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">
-                          <i className="fa fa-envelope" aria-hidden="true"></i>
+                        <i className="fa-solid fa-file-pdf"></i>
                         </span>
 
                         <input

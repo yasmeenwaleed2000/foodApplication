@@ -1,7 +1,11 @@
+body{
+  overflow-x: hidden;
+}
 .Auth-container {
   background-image: url(./assets/images/auth-bg.png);
   background-size: cover;
 }
+
 
 .overlay {
   background: linear-gradient(
@@ -11,11 +15,13 @@
   );
 }
 
+
+
 .sidebar-container .ps-sidebar-container {
   border-top-right-radius: 58px;
   background-color: #1f263e;
   color: #fff;
-  height: 100vh;
+  height: 3000px;
 }
 
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover {

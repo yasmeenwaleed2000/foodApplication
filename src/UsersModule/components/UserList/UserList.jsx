@@ -5,16 +5,34 @@ import noData from "../../../assets/images/noData.png";
 import NoData from "../../../SharedModule/components/NoData/NoData";
 
 export default function UserList() {
+  let token=localStorage.getItem("adminToken");
   const [usersList, setUserList]=useState([]);
+  const [pagesArray, setPagesArray] = useState([]);
+  const [nameSearch, setNameSearch] = useState("");
+  const [countrySearch, setCountrtSearch] = useState("");
  
-  const getList =async () => {
-    let token=localStorage.getItem("adminToken");
+  const getList =async (pageNo,pageSize,userName,country,groups,email) => {
+   
     try{
-        let response=await axios.get("https://upskilling-egypt.com:443/api/v1/Users/?pageSize=10&pageNumber=1",
+        let response=await axios.get("https://upskilling-egypt.com:443/api/v1/Users",
         {
           headers: { Authorization: token },
+          params:{
+            pageNumber:pageNo,
+            pageSize:pageSize,
+            userName:userName,
+            country:country,
+            groups:groups,
+            email:email,
+          }
         }
         );
+        setPagesArray(
+          Array
+          (response.data.totalNumberOfPages)
+          .fill()
+          .map((_, i)=>i+1));
+        console.log(response.data.totalNumberOfPages);
         setUserList(response.data.data);
         }
         catch (error){
@@ -22,8 +40,19 @@ export default function UserList() {
         }
           };
 
+          const getNameValue = (input) => {
+           // console.log(input)
+            setNameSearch(input.target.value);
+            getList(1, 20, input.target.value,countrySearch);
+          };
+          const getCountryValue = (input) => {
+            // console.log(input)
+            setCountrtSearch(input.target.value);
+             getList(1, 20, nameSearch,input.target.value);
+           };
+
           useEffect(()=>{
-            getList();
+            getList(1,20);
           },[]);
 
   return (
@@ -32,11 +61,32 @@ export default function UserList() {
         title="Users List"
         description="You can now add your items that any user can order it from the Application and you can edit"
       />
+ <div className="row p-4">
+        <div className="col-md-6">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search by Name"
+            onChange={getNameValue}
+          />
+        </div>
+        <div className="col-md-3">
+        <input
+            type="text"
+            className="form-control"
+            placeholder="Search by Country"
+            onChange={getCountryValue}
+          />
+        </div>
+
+        <div className="col-md-3">
+          
+        </div>
+      </div>
 
 
 
-
-   {<div className="table-container text-center px-5 my-3">
+   {<div className="table-container text-center px-5 ">
           {usersList.length > 0 ? (
             <table className="table">
               <thead>
@@ -44,6 +94,7 @@ export default function UserList() {
                   <th scope="col">Id</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Country</th>
                   <th scope="col">Image</th>
                   <th scope="col">phone</th>
                   
@@ -57,12 +108,38 @@ export default function UserList() {
                     <th scope="row">{user.id}</th>
                     <td>{user.userName}</td>
                     <td>{user.email}</td>
+                    <td>{user.country }</td>
                     <td>{user.imagePath?(<img className=" imagemodify" src={`https://upskilling-egypt.com/${user.imagePath}`} alt="" />):(<img className="imagemodify" src={noData} alt="noData" />)} </td>
                     <td>{user.phoneNumber}</td>
                    
                   </tr>
                 ))}
               </tbody>
+
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a className="page-link"  aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span className="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  {pagesArray.map((pageNo)=> <li key={pageNo} onClick={()=> getList(pageNo,10)} 
+                  className="page-item">
+                    <a className="page-link" >
+                     {pageNo}
+                    </a>
+                  </li>)}
+                 
+                
+                  <li className="page-item">
+                    <a className="page-link" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span className="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </table>
           )                                 
           

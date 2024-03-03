@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import Update from "../Update/Update";
 import Delete from "../Delete/Delete";
 import NoData from "../../../SharedModule/components/NoData/NoData";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export default function Categories() {
@@ -27,11 +30,14 @@ export default function Categories() {
       );
       getList();
       handleClose();
+      toast.success('Add is successfully')
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
   const [categoriesList, setCategoriesList] = useState([]);
+  const [pagesArray, setPagesArray] = useState([]);
+  const [nameSearch, setNameSearch] = useState("");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -39,21 +45,36 @@ export default function Categories() {
 
   let token = localStorage.getItem("adminToken");
 
-  const getList = async () => {
+  const getList = async (pageNo,pageSize,name) => {
     try {
       let categoriesList = await axios.get(
-        "https://upskilling-egypt.com:443/api/v1/Category/?pageSize=10&pageNumber=1",
+        "https://upskilling-egypt.com:443/api/v1/Category",
         {
           headers: { Authorization: token },
+          params:{
+            pageNumber:pageNo,
+            pageSize:pageSize,
+            name:name
+          }
         }
       );
+      setPagesArray(
+        Array
+        (categoriesList.data.totalNumberOfPages)
+        .fill()
+        .map((_, i)=>i+1));
+      console.log(categoriesList.data.totalNumberOfPages);
       setCategoriesList(categoriesList.data.data);
     } catch (error) {
       console.log(error);
     }
   };
+  const getNameValue=(input)=>{
+    setNameSearch(input.target.value);
+    getList(1, 10, input.target.value);
+  }
   useEffect(() => {
-    getList();
+    getList(1,5);
   }, []);
 
   return (
@@ -76,6 +97,17 @@ export default function Categories() {
           </div>
         </div>
 
+        <div className="row p-3 justify-content-center">
+        <div className="col-md-6">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search by Name"
+            onChange={getNameValue}
+          />
+        </div>
+        </div>
+
         <div className="table-container text-center">
           {categoriesList.length > 0 ? (
             <table className="table">
@@ -95,7 +127,7 @@ export default function Categories() {
                   
 
 
-                            <Update catId={cat.id} getAllItem={getList}/>
+                            <Update catName={cat.name} catId={cat.id} getAllItem={getList}/>
                
                             <Delete catId={cat.id} getAllItem={getList}/>
                       
@@ -104,6 +136,31 @@ export default function Categories() {
                   </tr>
                 ))}
               </tbody>
+
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a className="page-link"  aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span className="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  {pagesArray.map((pageNo)=> <li key={pageNo} onClick={()=> getList(pageNo,5)} 
+                  className="page-item">
+                    <a className="page-link" >
+                     {pageNo}
+                    </a>
+                  </li>)}
+                 
+                
+                  <li className="page-item">
+                    <a className="page-link" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span className="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </table>
           ) : (
 

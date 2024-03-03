@@ -3,6 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import { useState } from "react";
 import DeleteModel from "../../../SharedModule/components/DeleteModel/DeleteModel";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Delete({catId,getAllItem}) {
   const [show, setShow] = useState(false);
@@ -21,6 +24,7 @@ export default function Delete({catId,getAllItem}) {
       );
        
       handleClose();
+      toast.success("Delete is successfully");
       getAllItem();
       console.log(response);
      
@@ -32,7 +36,7 @@ export default function Delete({catId,getAllItem}) {
   
   return (
    <>
-   <button className="btn btn-danger" onClick={handleShow}>Delete</button>
+   <button className="btn btn-danger" onClick={handleShow}> Delete</button>
    
 
       <Modal show={show} onHide={handleClose}>
