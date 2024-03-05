@@ -10,6 +10,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
+
+
 export default function RecipesList() {
   const loginData= JSON.parse(localStorage.getItem("loginData"));
   
@@ -156,7 +159,7 @@ export default function RecipesList() {
         title="Recipes Items"
         description="You can now add your items that any user can order it from the Application and you can edit"
       />
-
+<ToastContainer />
       <div className="d-flex p-4 justify-content-between">
         <div className="title">
           <h5>Recipe Table Details</h5>
@@ -256,7 +259,7 @@ export default function RecipesList() {
 
                     <td>
                       {loginData?.userGroup=='SuperAdmin'?(<>
-                        <i
+                        <i updateId={recipe.id} namerec={recipe.name} imgrec={recipe.imagePath} catrec={recipe.category}
                         onClick={navigateToUpdateData}
                         className="fa fa-edit text-warning mx-2"
                         aria-hidden="true"
@@ -277,9 +280,14 @@ export default function RecipesList() {
                     </td>
                   </tr>
                 ))}
-              </tbody>
-
-              <nav aria-label="Page navigation example">
+             
+             </tbody>
+             
+              </table>
+          ) : (
+            <NoData />
+          )}
+           <nav aria-label="Page navigation example">
                 <ul className="pagination">
                   <li className="page-item">
                     <a className="page-link" aria-label="Previous">
@@ -305,12 +313,14 @@ export default function RecipesList() {
                   </li>
                 </ul>
               </nav>
-            </table>
-          ) : (
-            <NoData />
-          )}
         </div>
+        
       }
+      
     </>
   );
+  
 }
+
+
+

@@ -15,14 +15,26 @@ body{
   );
 }
 
+.sidebar-container{
+  height: 100%;
+ 
+}
+
 
 
 .sidebar-container .ps-sidebar-container {
   border-top-right-radius: 58px;
   background-color: #1f263e;
   color: #fff;
-  height: 3000px;
+  
+  
 }
+
+.sidebar-container .ps-sidebar-root{
+  height: 100%;
+}
+
+
 
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover {
   background-color: rgba(0, 176, 77, 0.2);
@@ -39,4 +51,9 @@ body{
 
 .imagemodify {
   width: 60px;
+}
+.bg-photo{
+  background-image: url(./assets/images/notFound.png);
+  background-size: cover;
+  background-position: bottom bottom;
 }

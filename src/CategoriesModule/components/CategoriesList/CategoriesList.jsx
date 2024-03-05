@@ -7,10 +7,8 @@ import { useForm } from "react-hook-form";
 import Update from "../Update/Update";
 import Delete from "../Delete/Delete";
 import NoData from "../../../SharedModule/components/NoData/NoData";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Categories() {
   const {
@@ -30,7 +28,7 @@ export default function Categories() {
       );
       getList();
       handleClose();
-      toast.success('Add is successfully')
+      toast.success("Add is successfully");
     } catch (error) {
       toast.error(error);
     }
@@ -45,36 +43,36 @@ export default function Categories() {
 
   let token = localStorage.getItem("adminToken");
 
-  const getList = async (pageNo,pageSize,name) => {
+  const getList = async (pageNo, pageSize, name) => {
     try {
       let categoriesList = await axios.get(
         "https://upskilling-egypt.com:443/api/v1/Category",
         {
           headers: { Authorization: token },
-          params:{
-            pageNumber:pageNo,
-            pageSize:pageSize,
-            name:name
-          }
+          params: {
+            pageNumber: pageNo,
+            pageSize: pageSize,
+            name: name,
+          },
         }
       );
       setPagesArray(
-        Array
-        (categoriesList.data.totalNumberOfPages)
-        .fill()
-        .map((_, i)=>i+1));
+        Array(categoriesList.data.totalNumberOfPages)
+          .fill()
+          .map((_, i) => i + 1)
+      );
       console.log(categoriesList.data.totalNumberOfPages);
       setCategoriesList(categoriesList.data.data);
     } catch (error) {
       console.log(error);
     }
   };
-  const getNameValue=(input)=>{
+  const getNameValue = (input) => {
     setNameSearch(input.target.value);
     getList(1, 10, input.target.value);
-  }
+  };
   useEffect(() => {
-    getList(1,5);
+    getList(1, 5);
   }, []);
 
   return (
@@ -97,15 +95,15 @@ export default function Categories() {
           </div>
         </div>
 
-        <div className="row p-3 justify-content-center">
-        <div className="col-md-6">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search by Name"
-            onChange={getNameValue}
-          />
-        </div>
+        <div className="row p-3 ">
+          <div className="col-md-6">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by Name"
+              onChange={getNameValue}
+            />
+          </div>
         </div>
 
         <div className="table-container text-center">
@@ -124,49 +122,47 @@ export default function Categories() {
                     <th scope="row">{cat.id}</th>
                     <td>{cat.name}</td>
                     <td>
-                  
+                      <Update
+                        catName={cat.name}
+                        catId={cat.id}
+                        getAllItem={getList}
+                      />
 
-
-                            <Update catName={cat.name} catId={cat.id} getAllItem={getList}/>
-               
-                            <Delete catId={cat.id} getAllItem={getList}/>
-                      
-
+                      <Delete catId={cat.id} getAllItem={getList} />
                     </td>
                   </tr>
                 ))}
               </tbody>
-
-              <nav aria-label="Page navigation example">
-                <ul className="pagination">
-                  <li className="page-item">
-                    <a className="page-link"  aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span className="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  {pagesArray.map((pageNo)=> <li key={pageNo} onClick={()=> getList(pageNo,5)} 
-                  className="page-item">
-                    <a className="page-link" >
-                     {pageNo}
-                    </a>
-                  </li>)}
-                 
-                
-                  <li className="page-item">
-                    <a className="page-link" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span className="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
             </table>
           ) : (
-
-            <NoData/>
-          
+            <NoData />
           )}
+          <nav aria-label="Page navigation example ">
+            <ul className="pagination ms-2">
+              <li className="page-item">
+                <a className="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span className="sr-only">Previous</span>
+                </a>
+              </li>
+              {pagesArray.map((pageNo) => (
+                <li
+                  key={pageNo}
+                  onClick={() => getList(pageNo, 5)}
+                  className="page-item"
+                >
+                  <a className="page-link">{pageNo}</a>
+                </li>
+              ))}
+
+              <li className="page-item">
+                <a className="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span className="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
 
@@ -201,14 +197,6 @@ export default function Categories() {
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
         </Modal>
-
-
-
-
-
-
-
-       
       </div>
     </>
   );

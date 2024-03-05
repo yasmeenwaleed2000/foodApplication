@@ -4,13 +4,14 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 export default function UpdateData() {
     let token = localStorage.getItem("adminToken");
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors },setValue
       } = useForm();
 
       const navigate = useNavigate();
@@ -31,17 +32,17 @@ export default function UpdateData() {
   };
 
 
-  const onSubmitAdd = async(data) => {
+  const onSubmitUpdate = async({data,updateId,namerec,imgrec, catrec}) => {
     let recipeDataForm= appendToFormData(data);
  
     try {
      let response = await axios.put(
-       "https://upskilling-egypt.com:443/api/v1/Recipe/211",recipeDataForm,
+       `https://upskilling-egypt.com:443/api/v1/Recipe/${updateId}`,recipeDataForm,
        {
          headers: { Authorization: token },
        },
      );
-     //console.log(response)
+     console.log(response)
      toast.success(response.data.message)
      navigateToRecipe();
  
@@ -50,8 +51,20 @@ export default function UpdateData() {
    }
    };
 
+   useEffect(()=>{
+    setValue("name", data.name);
+    setValue("price", data.price);
+    setValue("description", data.description); 
+    setValue("tagId", data.tagId); 
+    setValue("categoriesIds", data.categoriesIds); 
+    setValue("recipeImage", data.recipeImage?.[0]); 
+  },[data, setValue])
+ 
+
    const [categoriesList, setCategoriesList] = useState([]);
   const [tagsList, setTagsList] = useState([]);
+
+  //call categoriesList start page update
   const getCategoriesList = async () => {
     try {
       let response = await axios.get(
@@ -67,6 +80,8 @@ export default function UpdateData() {
       console.log(error);
     }
   };
+
+  //call tag categoriesList start page update
 
    const getTagsList = async () => {
     try {
@@ -88,6 +103,7 @@ export default function UpdateData() {
     getCategoriesList();
     getTagsList();
   }, []);
+  
 
 
   return (
@@ -96,7 +112,7 @@ export default function UpdateData() {
     <ToastContainer />
 
     <div className="p-5">
-        <form onSubmit={handleSubmit(onSubmitAdd)}>
+        <form onSubmit={handleSubmit(onSubmitUpdate)}>
           <div className="input-group mb-3">
             <input
               type="text"
