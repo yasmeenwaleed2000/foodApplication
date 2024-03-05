@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateData() {
+  const [recipeData,setRecipeData]=useState({});
+  const [category,setCategory]=useState([]);
     let token = localStorage.getItem("adminToken");
     const {
         register,
@@ -19,6 +21,9 @@ export default function UpdateData() {
     navigate('/dashboard/recipes')
   };
 
+  const params=useParams();
+  console.log(params);
+  
   const appendToFormData = (data) => {
     let formData = new FormData();
     formData.append("name",data.name);
@@ -31,13 +36,29 @@ export default function UpdateData() {
     return formData;
   };
 
+  
 
-  const onSubmitUpdate = async({data,updateId,namerec,imgrec, catrec}) => {
+const fetchRecipeId=async()=>{
+  try{
+              let response=await axios.get(`https://upskilling-egypt.com:443/api/v1/Recipe/${params.recipeId}`)
+              setRecipeData(response.data);
+              setCategory(response.data.category);
+              console.log(response.data);
+              
+  }
+  catch(error){
+    console.log(error)
+  }
+
+}
+
+console.log(category);
+  const onSubmitUpdate = async(data) => {
     let recipeDataForm= appendToFormData(data);
  
     try {
      let response = await axios.put(
-       `https://upskilling-egypt.com:443/api/v1/Recipe/${updateId}`,recipeDataForm,
+       `https://upskilling-egypt.com:443/api/v1/Recipe/${params.recipeId}`,recipeDataForm,
        {
          headers: { Authorization: token },
        },
@@ -51,14 +72,14 @@ export default function UpdateData() {
    }
    };
 
-   useEffect(()=>{
+  /* useEffect(()=>{
     setValue("name", data.name);
     setValue("price", data.price);
     setValue("description", data.description); 
     setValue("tagId", data.tagId); 
     setValue("categoriesIds", data.categoriesIds); 
     setValue("recipeImage", data.recipeImage?.[0]); 
-  },[data, setValue])
+  },[data, setValue])*/
  
 
    const [categoriesList, setCategoriesList] = useState([]);
@@ -100,8 +121,10 @@ export default function UpdateData() {
   };
 
   useEffect(() => {
+    fetchRecipeId()
     getCategoriesList();
     getTagsList();
+    
   }, []);
   
 
@@ -115,6 +138,7 @@ export default function UpdateData() {
         <form onSubmit={handleSubmit(onSubmitUpdate)}>
           <div className="input-group mb-3">
             <input
+            defaultValue={recipeData.name}
               type="text"
               className="form-control"
               placeholder="Recipe Name "
@@ -130,6 +154,7 @@ export default function UpdateData() {
 
           <div className="input-group mb-3">
             <input
+            defaultValue={recipeData.price}
               type="number"
               className="form-control"
               placeholder="Enter price "
@@ -146,7 +171,7 @@ export default function UpdateData() {
 
             <div className="input-group mb-3">
             <textarea
-            
+             defaultValue={recipeData.description}
               className="form-control"
               placeholder="description  "
               {...register("description", {
@@ -163,6 +188,7 @@ export default function UpdateData() {
 
         <div className="input-group mb-3">
             <select
+           defaultValue={recipeData?.tag?.id || " "}
                  type="number"
               className="form-control"
               {...register("tagId", {
@@ -170,6 +196,7 @@ export default function UpdateData() {
               })}
             >
               {tagsList?.map((tag) => (
+
                 <option key={tag.id} value={tag.id}>
                   {tag.name}
                 </option>
@@ -187,6 +214,7 @@ export default function UpdateData() {
 
           <div className="input-group mb-3">
             <select
+           defaultValue={category.length > 0 ?recipeData.category[0].id: " "}
               className="form-control"
               {...register("categoriesIds", {
                 required: "categoriesIds is required",
@@ -208,6 +236,7 @@ export default function UpdateData() {
 
           <div className="input-group mb-3">
             <input
+            defaultValue={recipeData.imagePath}
               type="file"
               className="form-control"
               {...register("recipeImage", {

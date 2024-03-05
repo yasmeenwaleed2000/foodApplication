@@ -49,7 +49,7 @@ function App() {
         { path: "recipes", element: <RecipesList /> },
         { path: "userlist", element: <UserList /> },
         { path: "recipes-data", element: <RecipesData /> },
-        { path: "update-data", element: <UpdateData /> },
+        { path: "update-data/:recipeId", element: <UpdateData /> },
         { path: "categorieslist", element: <CategoriesList /> },
         { path: "favouritesList", element: <FavouritesList /> },
       ],

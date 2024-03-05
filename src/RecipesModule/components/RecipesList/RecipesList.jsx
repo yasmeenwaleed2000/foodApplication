@@ -4,7 +4,7 @@ import axios from "axios";
 import noData from "../../../assets/images/noData.png";
 import Modal from "react-bootstrap/Modal";
 import DeleteModel from "../../../SharedModule/components/DeleteModel/DeleteModel";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NoData from "../../../SharedModule/components/NoData/NoData";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -259,11 +259,15 @@ export default function RecipesList() {
 
                     <td>
                       {loginData?.userGroup=='SuperAdmin'?(<>
+
+                        <Link to={`/dashboard/update-data/${recipe.id}`}> 
                         <i updateId={recipe.id} namerec={recipe.name} imgrec={recipe.imagePath} catrec={recipe.category}
-                        onClick={navigateToUpdateData}
-                        className="fa fa-edit text-warning mx-2"
-                        aria-hidden="true"
-                      ></i>
+                       
+                       className="fa fa-edit text-warning mx-2"
+                       aria-hidden="true"
+                     ></i>
+                        </Link>
+                       
 
                       <i
                         onClick={() => handleShow(recipe.id)}
