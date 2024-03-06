@@ -68,7 +68,7 @@ export default function SideBar({ adminData }) {
 
             {adminData?.userGroup == "SystemUser" ? (
               <MenuItem
-                icon={<i className="fa fa-heart text-danger"></i>}
+                icon={<i className="fa fa-heart text-white"></i>}
                 component={<Link to="/dashboard/favouritesList" />}
               >
                 Favourites

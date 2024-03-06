@@ -129,7 +129,7 @@ export default function FavouritesList() {
                 <div className="item mt-4 ">
                   {fav.recipe.imagePath ? (
                     <img
-                      className="img-fluid w-50"
+                      className="img-fluid w-25"
                       src={`https://upskilling-egypt.com/${fav.recipe?.imagePath}`}
                       alt="NoPhoto"
                     />
@@ -146,7 +146,6 @@ export default function FavouritesList() {
                   className="btn btn-outline-danger"
                   onClick={() => handleShow(fav.id)}
                 >
-                  
                   Delete Item
                   <i
                     className="fa fa-trash text-danger mx-2"

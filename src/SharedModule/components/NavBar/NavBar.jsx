@@ -20,7 +20,7 @@ export default function Navbar({adminData}) {
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
        
         <li className="nav-item">
-          <a className="nav-link" href="#">{adminData?.userName}</a>
+          <a className="nav-link" >{adminData?.userName}</a>
           
         </li>
        

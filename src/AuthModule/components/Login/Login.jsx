@@ -88,7 +88,7 @@ export default function Login({saveAdminData}) {
                   <Link to={"/register"} className="text-success">
                   Register Now?
                     </Link>
-                    <Link to={"forgot-pass"} className="text-success">
+                    <Link to={"/forgot-pass"} className="text-success">
                       Forget password?
                     </Link>
                   </div>

@@ -1,11 +1,10 @@
-body{
+body {
   overflow-x: hidden;
 }
 .Auth-container {
   background-image: url(./assets/images/auth-bg.png);
   background-size: cover;
 }
-
 
 .overlay {
   background: linear-gradient(
@@ -15,26 +14,27 @@ body{
   );
 }
 
-.sidebar-container{
+.sidebar-container {
   height: 100%;
- 
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
 }
 
-
+.w-sidebar {
+  width: 18rem;
+}
 
 .sidebar-container .ps-sidebar-container {
   border-top-right-radius: 58px;
   background-color: #1f263e;
   color: #fff;
-  
-  
 }
 
-.sidebar-container .ps-sidebar-root{
+.sidebar-container .ps-sidebar-root {
   height: 100%;
 }
-
-
 
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover {
   background-color: rgba(0, 176, 77, 0.2);
@@ -52,7 +52,7 @@ body{
 .imagemodify {
   width: 60px;
 }
-.bg-photo{
+.bg-photo {
   background-image: url(./assets/images/notFound.png);
   background-size: cover;
   background-position: bottom bottom;

@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../../assets/images/logo.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {Link ,useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -65,7 +65,13 @@ export default function Forgotpass() {
                     <p className="alert alert-danger">{errors.email.message}</p>
                   )}
 
-                  <button className="w-100 btn btn-success mt-5">Submit</button>
+                  <button className="w-100 btn btn-success mt-3">Submit</button>
+                        
+
+                  <Link to={"/login"} className="text-success mt-4">
+                  Back Login?
+                    </Link>
+
                 </form>
               </div>
             </div>
