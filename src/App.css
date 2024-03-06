@@ -14,6 +14,15 @@ body {
   );
 }
 
+/*.pageOverflow::-webkit-scrollbar{
+  display: none;
+}*/
+
+/*.pageOverflow{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}*/
+
 .sidebar-container {
   height: 100%;
   position: fixed;

@@ -1,7 +1,8 @@
 {
-  "homepage": "https://yasmeenwaleed2000.github.io/foodAplication",
+  
   "name": "food-app",
   "private": true,
+  "homepage":"./",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

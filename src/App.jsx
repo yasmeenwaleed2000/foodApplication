@@ -35,7 +35,7 @@ function App() {
     }
   }, []);
 
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "dashboard",
       element: (
