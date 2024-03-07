@@ -22,7 +22,7 @@ export default function SideBar({ adminData }) {
   };
   return (
     <>
-      <div className="sidebar-container w-100">
+      <div className="sidebar-container">
         <Sidebar collapsed={isCollapsed} className="">
           <Menu>
             <MenuItem

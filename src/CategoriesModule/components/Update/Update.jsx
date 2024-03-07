@@ -44,8 +44,9 @@ export default function Update({catId,getAllItem,catName}) {
   
   return (
     <>
+    
 <button className="btn btn-warning mx-2"  onClick={handleShow}>Update</button>
-
+ 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edite Category</Modal.Title>

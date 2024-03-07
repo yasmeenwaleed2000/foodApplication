@@ -47,7 +47,7 @@ export default function RecipesData() {
       },
     );
     
-    toast.success(response.data.message)
+    toast.success("Add Successfully")
     navigateToRecipe();
 
   } catch (error) {
@@ -102,6 +102,7 @@ export default function RecipesData() {
       <RecipesHeader />
       <ToastContainer />
       <div className="p-5">
+      
         <form onSubmit={handleSubmit(onSubmitAdd)}>
           <div className="input-group mb-3">
             <input

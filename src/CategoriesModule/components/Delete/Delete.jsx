@@ -36,6 +36,7 @@ export default function Delete({catId,getAllItem}) {
   
   return (
    <>
+   
    <button className="btn btn-danger" onClick={handleShow}> Delete</button>
    
 

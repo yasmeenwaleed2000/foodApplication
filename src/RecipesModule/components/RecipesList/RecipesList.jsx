@@ -78,8 +78,10 @@ export default function RecipesList() {
       );
       getListRecipes();
       handleClose();
+      toast.success("Delete successfully");
       
     } catch (error) {
+      toast.error(error);
       console.log(error);
     }
   };
