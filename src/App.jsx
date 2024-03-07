@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, createHashRouter } from "react-router-dom";
 import Home from "../src/HomeModule/components/Home/Home";
 import Notfound from "../src/SharedModule/components/Notfound/Notfound";
 import AuthLayout from "./SharedModule/components/AuthLayout/AuthLayout";
@@ -35,7 +35,7 @@ function App() {
     }
   }, []);
 
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "dashboard",
       element: (
